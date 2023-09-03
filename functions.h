@@ -35,12 +35,14 @@ struct Student
 
 //Function Protytpes
 void displayMenu();
-void choice(Student * ptrs[], vector<Student> &student);
+void choice(Student * lastName[], Student * ssn[], Student * firstName[], vector<Student> &student);
 void readFile(vector<Student> &student, ifstream &gradeFile);
 void displayVector(vector<Student> &student);
 void point(Student * ptrs[], vector<Student> &student, int size);
 void displayArrayThroughPointers(Student *ptrs[], int size);
-void sortPointers(Student * ptrs[], int size, int choice);
+void sortPointersLastName(Student * ptrs[], int size);
+void sortPointersSSN(Student * ptrs[], int size);
+void sortPointersFirstName(Student * ptrs[], int size);
 int binarySearch(Student * ptrs[], int size, int choice, string value);
 void displaySearch(Student * ptrs[], int place);
 

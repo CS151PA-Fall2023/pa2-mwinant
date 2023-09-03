@@ -18,6 +18,7 @@ using namespace std;
 
 int main()
 {
+    //open file
     ifstream gradeFile;
     gradeFile.open("grades.csv");
 
@@ -29,22 +30,36 @@ int main()
     }
     //Define vector of struct
     vector<Student> student;
-    //define array of pointers called ptr
-    Student *ptr[SIZE];
+
+    //define array of pointers for last name, SSN, & first name indexing
+    Student *indexByLastname[SIZE], *indexBySSN[SIZE], *indexByFirstName[SIZE];
+
     //read csv file
     readFile(student, gradeFile);
-    //point ptr to vector
-    point(ptr, student, SIZE);
-    //display menu to user, display sorted vector based on choice
-    choice(ptr, student);
-    //displayVector(student); //for testing
-    //displayArrayThroughPointers(ptr, SIZE);
-    
+
+    //point lastName ptr to vector
+    point(indexByLastname, student, SIZE);
+
+    //point SSN ptr to vector
+    point(indexBySSN, student, SIZE);
+
+    //point first name prt to vector
+    point(indexByFirstName, student, SIZE);
+
+    //sort index by last name
+    sortPointersLastName(indexByLastname, SIZE);
+
+    //sort index by SSN
+    sortPointersSSN(indexBySSN, SIZE);
+
+    //sort index by first name
+    sortPointersFirstName(indexByFirstName, SIZE);
+
+    //allow user to see menu and make choice
+    choice(indexByLastname, indexBySSN, indexByFirstName, student);
+
     //close file
     gradeFile.close();
-
-
-
 
     return 0;
 }
