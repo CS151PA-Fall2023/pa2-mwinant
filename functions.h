@@ -12,8 +12,11 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <iomanip>
 
 using namespace std;
+
+const int SIZE = 20;
 
 #ifndef FUNCTIONS_H
 #define FUNCTIONS_H
@@ -32,9 +35,14 @@ struct Student
 
 //Function Protytpes
 void displayMenu();
-void choice();
+void choice(Student * ptrs[], vector<Student> &student);
 void readFile(vector<Student> &student, ifstream &gradeFile);
 void displayVector(vector<Student> &student);
+void point(Student * ptrs[], vector<Student> &student, int size);
+void displayArrayThroughPointers(Student *ptrs[], int size);
+void sortPointers(Student * ptrs[], int size, int choice);
+int binarySearch(Student * ptrs[], int size, int choice, string value);
+void displaySearch(Student * ptrs[], int place);
 
 
 #endif

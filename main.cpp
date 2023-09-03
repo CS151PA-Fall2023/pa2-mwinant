@@ -12,6 +12,7 @@
 #include <fstream>
 #include <vector>
 #include <string>
+#include <iomanip>
 #include "functions.h"
 using namespace std;
 
@@ -26,16 +27,21 @@ int main()
         cout<< "Error opening file\n";
         exit(1);
     }
-    else
-    {
-        cout<< "File opened successfully\n";
-    }
+    //Define vector of struct
     vector<Student> student;
-
-    //displayMenu();
-    //choice();
+    //define array of pointers called ptr
+    Student *ptr[SIZE];
+    //read csv file
     readFile(student, gradeFile);
-    displayVector(student);
+    //point ptr to vector
+    point(ptr, student, SIZE);
+    //display menu to user, display sorted vector based on choice
+    choice(ptr, student);
+    //displayVector(student); //for testing
+    //displayArrayThroughPointers(ptr, SIZE);
+    
+    //close file
+    gradeFile.close();
 
 
 

@@ -28,11 +28,51 @@ void displayMenu()
  * @brief displays information based on choice from user
  * 
  */
-void choice()
+void choice(Student * ptrs[], vector<Student> &student)
 {
+    string name=""; //last name
+    string num; //ssn
     int choice=0;
+    int place=0;
+    
     do
     {
+        displayMenu();
+        cin>>choice;
+        switch(choice){
+            case 1:
+            cout << "\n\nSorted by Last Name\n";
+            sortPointers(ptrs, SIZE, 3);
+            displayArrayThroughPointers(ptrs, SIZE);
+            break;
+
+            case 2:
+            cout << "\n\nSorted by SSN\n";
+            sortPointers(ptrs, SIZE, 4);
+            displayArrayThroughPointers(ptrs, SIZE);
+            break;
+
+            case 3: 
+            cout << "Please enter last name\n";          
+            cin.ignore();
+            getline(cin, name, '\n');
+            sortPointers(ptrs, SIZE, 3);
+            place=binarySearch(ptrs, SIZE, 3, name);
+            displaySearch(ptrs, place);
+            cout<< endl;
+            break;
+
+            case 4:
+            cout<< "Please enter SSN\n";
+            cin.ignore();
+            getline(cin, num, '\n');
+            sortPointers(ptrs, SIZE, 4);
+            place=binarySearch(ptrs, SIZE, 4, num);
+            cout<< "\n\nSearch Result by SSN\n";
+            displaySearch(ptrs, place);
+            cout<< endl;
+            break;
+        }
 
     }while(choice!=5);
     
@@ -79,4 +119,138 @@ void displayVector(vector<Student> &student)
         cout<< student[i].letterGrade<<" "<<"\n";
     }
 
+}
+void point(Student * ptrs[], vector<Student> &student, int size)
+{
+   //ASSIGN EACH POINTER IN ptrs THE ADRESS OF CORRESPONDING ELEMENT IN array
+  for(int i=0; i<size; i++)
+  {
+    ptrs[i]=&student[i];
+  }
+  
+   
+}
+void displayArrayThroughPointers(Student *ptrs[], int size)
+{
+    cout <<left<<setw(4)<<"ID"<<setw(11)<< "Last Name"<<setw(11)<<"First Name";
+    cout <<setw(12)<<"SSN"<<setw(5)<<"Grade\n";
+    //DISPLAY array USING POINTERS IN ptrs
+    for(int i=0; i<size; i++)
+    {
+        cout<< setw(4)<<ptrs[i]->id<<setw(11)<<ptrs[i]->lastName<<setw(11)<<ptrs[i]->firstName;
+        cout<< setw(12)<<ptrs[i]->ssn<<setw(5)<<ptrs[i]->letterGrade;
+        cout<< endl;
+    }
+    cout<< endl;
+}
+/**
+ * @brief Indirectly sort the array of pointers
+ * 
+ * @param ptrs array of pointers to int
+ * @param size size of the array
+ */
+
+void sortPointers(Student * ptrs[], int size, int choice)
+{
+    bool madeAswap = true;
+    int lastIndex = size - 1;
+    if(choice==3)
+    {
+        while (madeAswap)
+        {
+            madeAswap = false;
+            for (int count = 0; count < lastIndex; ++count)
+            {
+                if ((ptrs[count]->lastName) > (ptrs[count + 1]->lastName))
+                {
+                Student *temp= ptrs[count];
+                ptrs[count] = ptrs[count + 1];
+                ptrs[count + 1] = temp;
+                madeAswap = true;
+                }
+            }
+    --lastIndex;
+        }
+    }
+    else if(choice==4)
+    {
+        while (madeAswap)
+        {
+            madeAswap = false;
+            for (int count = 0; count < lastIndex; ++count)
+            {
+                if ((ptrs[count]->ssn) > (ptrs[count + 1]->ssn))
+                {
+                Student *temp= ptrs[count];
+                ptrs[count] = ptrs[count + 1];
+                ptrs[count + 1] = temp;
+                madeAswap = true;
+                }
+            }
+    --lastIndex;
+        }
+
+    }
+
+}
+int binarySearch(Student * ptrs[], int size, int choice, string value)
+{
+    int first = 0, // First array element
+    last = size - 1, // Last array element
+    middle, // Midpoint of search
+    position = -1; // Position of search value
+    bool found = false; // Flag
+    if(choice==3)
+    {
+        while (!found && first <= last)
+        {
+            middle = (first + last) / 2; // Calculate midpoint
+            if (ptrs[middle]->lastName == value) // If value is found at mid
+            {
+                found = true;
+                position = middle;
+            }
+            else if (ptrs[middle]->lastName > value) // If value is in lower half
+            {
+                last = middle - 1;
+            }
+            else
+            {
+                first = middle + 1; // If value is in upper half
+            }
+        }
+        return position;
+    }
+    else if(choice==4)
+    {
+        while (!found && first <= last)
+        {
+            middle = (first + last) / 2; // Calculate midpoint
+            if (ptrs[middle]->ssn == value) // If value is found at mid
+            {
+                found = true;
+                position = middle;
+            }
+            else if (ptrs[middle]->ssn > value) // If value is in lower half
+            {
+                last = middle - 1;
+            }
+            else
+            {
+                first = middle + 1; // If value is in upper half
+            }
+        }
+    return position;
+    }
+    else
+    return position;
+}
+
+void displaySearch(Student * ptrs[], int place)
+{
+            cout <<left<<setw(4)<<"ID"<<setw(11)<< "Last Name"<<setw(11)<<"First Name";
+            cout <<setw(12)<<"SSN"<<setw(5)<<"Grade\n";
+            cout<< setw(4)<<ptrs[place]->id<<setw(11)<<ptrs[place]->lastName<<setw(11)<<ptrs[place]->firstName;
+            cout<< setw(12)<<ptrs[place]->ssn<<setw(5)<<ptrs[place]->letterGrade;
+            cout<< endl;
 }
