@@ -102,6 +102,9 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             cout<< endl;
             break;
         }
+        cout << "Press Enter to Continue...\n";
+        cin.ignore();
+        getchar(); //alows break before displaying menu again
 
     }while(choice!=7);
     
@@ -124,6 +127,7 @@ void readFile(vector<Student> &student, ifstream &gradeFile)
 
         gradeFile>>line.id>>delim;
         getline(gradeFile, line.lastName, ',');
+        //line.lastName[0]=toupper(line.lastName[0]);
         getline(gradeFile, line.firstName, ',');
         getline(gradeFile, line.ssn, ',');
         gradeFile>>line.test[0]>>delim;
@@ -208,7 +212,7 @@ void sortPointersLastName(Student * ptrs[], int size)
             madeAswap = false;
             for (int count = 0; count < lastIndex; ++count)
             {
-                if ((ptrs[count]->lastName) > (ptrs[count + 1]->lastName))
+                if(isGreater(ptrs[count]->lastName,ptrs[count+1]->lastName))
                 {
                 Student *temp= ptrs[count];
                 ptrs[count] = ptrs[count + 1];
@@ -266,7 +270,7 @@ void sortPointersFirstName(Student * ptrs[], int size)
             madeAswap = false;
             for (int count = 0; count < lastIndex; ++count)
             {
-                if ((ptrs[count]->firstName) > (ptrs[count + 1]->firstName))
+                if(isGreater(ptrs[count]->firstName,ptrs[count+1]->firstName))
                 {
                 Student *temp= ptrs[count];
                 ptrs[count] = ptrs[count + 1];
@@ -377,4 +381,15 @@ void displaySearch(Student * ptrs[], int place)
             cout<< setw(4)<<ptrs[place]->id<<setw(11)<<ptrs[place]->lastName<<setw(11)<<ptrs[place]->firstName;
             cout<< setw(12)<<ptrs[place]->ssn<<setw(5)<<ptrs[place]->letterGrade;
             cout<< endl;
+
+}
+bool isGreater(string s1, string s2)
+{
+    if(toupper(s1[0])>toupper(s2[0]))
+    {
+        return true;
+    }
+    else{
+    return false;
+    }
 }
