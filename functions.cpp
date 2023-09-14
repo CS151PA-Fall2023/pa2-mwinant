@@ -59,10 +59,10 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             break;
 
             case 4: 
-            cout << "Please enter last name\n";          
-            cin.ignore();
+            cout << "Please enter last name\n";  
+            cin.ignore();        
             getline(cin, last, '\n');
-            place=binarySearch(lastName, SIZE, 3, last);
+            place=binarySearch(lastName, SIZE, 4, last);
             if(place==-1)
             {
                 cout<<"Invlaid user input, Please Try again\n";
@@ -76,7 +76,7 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             cout<< "Please enter SSN\n";
             cin.ignore();
             getline(cin, num, '\n');
-            place=binarySearch(ssn, SIZE, 4, num);
+            place=binarySearch(ssn, SIZE, 5, num);
             if(place==-1)
             {
                 cout<<"Invlaid user input, Please Try again\n";
@@ -91,7 +91,7 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             cout<< "Please enter First Name\n";
             cin.ignore();
             getline(cin, first, '\n');
-            place=binarySearch(firstName, SIZE, 5, first);
+            place=binarySearch(firstName, SIZE, 6, first);
             if(place==-1)
             {
                 cout<<"Invlaid user input, Please Try again\n";
@@ -103,7 +103,6 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             break;
         }
         cout << "Press Enter to Continue...\n";
-        cin.ignore();
         getchar(); //alows break before displaying menu again
 
     }while(choice!=7);
@@ -301,7 +300,7 @@ int binarySearch(Student * ptrs[], int size, int choice, string value)
     position = -1; // Position of search value
     bool found = false; // Flag
 
-    if(choice==3) //sort by last name
+    if(choice==4) //search by last name
     {
         while (!found && first <= last)
         {
@@ -322,7 +321,7 @@ int binarySearch(Student * ptrs[], int size, int choice, string value)
         }
         return position;
     }
-    else if(choice==4)//sort by ssn
+    else if(choice==5)//search by ssn
     {
         while (!found && first <= last)
         {
@@ -343,7 +342,7 @@ int binarySearch(Student * ptrs[], int size, int choice, string value)
         }
     return position;
     }
-    else if(choice==5) //sort by first name
+    else if(choice==6) //search by first name
     {
         while (!found && first <= last)
         {
