@@ -48,5 +48,4 @@ int binarySearch(Student * ptrs[], int size, int choice, string value);
 void displaySearch(Student * ptrs[], int place);
 bool isGreater(string s1, string s2);
 
-
 #endif

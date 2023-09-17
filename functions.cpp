@@ -46,16 +46,19 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             case 1:
             cout << "\n\nSorted by Last Name\n";
             displayArrayThroughPointers(lastName, SIZE);
+            cin.ignore();
             break;
 
             case 2:
             cout << "\n\nSorted by SSN\n";
             displayArrayThroughPointers(ssn, SIZE);
+            cin.ignore();
             break;
 
             case 3:
             cout << "\n\nSorted by first name\n";
             displayArrayThroughPointers(firstName, SIZE);
+            cin.ignore();
             break;
 
             case 4: 
@@ -63,10 +66,11 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             cin.ignore();        
             getline(cin, last, '\n');
             place=binarySearch(lastName, SIZE, 4, last);
-            if(place==-1)
+            while(place==-1)
             {
-                cout<<"Invlaid user input, Please Try again\n";
-                break;
+                cout<<"Invlaid user input, Please Try again\n\n";
+                getline(cin, last, '\n');
+                place=binarySearch(lastName, SIZE, 4, last);
             }
             displaySearch(lastName, place);
             cout<< endl;
@@ -77,12 +81,14 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             cin.ignore();
             getline(cin, num, '\n');
             place=binarySearch(ssn, SIZE, 5, num);
-            if(place==-1)
+            while(place==-1)
             {
-                cout<<"Invlaid user input, Please Try again\n";
-                break;
+                cout<<"Invlaid user input, Please Try again\n\n";
+                getline(cin, num, '\n');
+                place=binarySearch(ssn, SIZE, 5, num);
+                
             }
-            cout<< "\n\nSearch Result by SSN\n";
+            //cout<< "\n\nSearch resultult by SSN\n";
             displaySearch(ssn, place);
             cout<< endl;
             break;
@@ -92,17 +98,21 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             cin.ignore();
             getline(cin, first, '\n');
             place=binarySearch(firstName, SIZE, 6, first);
-            if(place==-1)
+            while(place==-1)
             {
-                cout<<"Invlaid user input, Please Try again\n";
-                break;
+                cout<<"Invlaid user input, Please Try again\n\n";
+                getline(cin, first, '\n');
+                place=binarySearch(firstName, SIZE, 6, first);
             }
-            cout<< "\n\nSearch Result by First Name\n";
+            //cout<< "\n\nSearch resultult by First Name\n";
             displaySearch(firstName, place);
             cout<< endl;
             break;
         }
-        cout << "Press Enter to Continue...\n";
+        if(choice!=7)
+        {
+            cout << "\nPress Enter to Continue...\n";
+        }
         getchar(); //alows break before displaying menu again
 
     }while(choice!=7);
@@ -167,7 +177,7 @@ void displayVector(vector<Student> &student)
  */
 void point(Student * ptrs[], vector<Student> &student, int size)
 {
-   //ASSIGN EACH POINTER IN ptrs THE ADRESS OF CORRESPONDING ELEMENT IN array
+   //ASSIGN EACH POINTER IN ptrs THE ADresultS OF CORresultPONDING ELEMENT IN array
   for(int i=0; i<size; i++)
   {
     ptrs[i]=&student[i];
@@ -361,6 +371,10 @@ int binarySearch(Student * ptrs[], int size, int choice, string value)
                 first = middle + 1; // If value is in upper half
             }
         }
+    if(ptrs[position+1]->firstName==value)
+    {
+        displaySearch(ptrs, position+1);
+    }
     return position;
     
     }
