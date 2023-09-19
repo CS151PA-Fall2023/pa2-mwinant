@@ -68,7 +68,7 @@ void choice(Student * lastName[], Student * ssn[], Student* firstName[], vector<
             place=binarySearch(lastName, SIZE, 4, last);
             while(place==-1)
             {
-                cout<<"Invlaid user input, Please Try again\n\n";
+                cout<<"Invalid user input, Please Try again\n\n";
                 getline(cin, last, '\n');
                 place=binarySearch(lastName, SIZE, 4, last);
             }
@@ -320,7 +320,7 @@ int binarySearch(Student * ptrs[], int size, int choice, string value)
                 found = true;
                 position = middle;
             }
-            else if (ptrs[middle]->lastName > value) // If value is in lower half
+            else if (isGreater(ptrs[middle]->lastName, value)) // If value is in lower half
             {
                 last = middle - 1;
             }
@@ -398,11 +398,19 @@ void displaySearch(Student * ptrs[], int place)
 }
 bool isGreater(string s1, string s2)
 {
-    if(toupper(s1[0])>toupper(s2[0]))
+    if(allToUpper(s1)>allToUpper(s2))
     {
         return true;
     }
-    else{
     return false;
+}
+string allToUpper(string s1)
+{
+    string s2=s1;
+    for(int i=0; i<s1.size(); i++)
+    {
+        s2[i]=toupper(s1[i]);
+
     }
+    return s2;
 }
