@@ -362,7 +362,7 @@ int binarySearch(Student * ptrs[], int size, int choice, string value)
                 found = true;
                 position = middle;
             }
-            else if (ptrs[middle]->firstName > value) // If value is in lower half
+            else if (isGreater(ptrs[middle]->firstName, value)) // If value is in lower half
             {
                 last = middle - 1;
             }
